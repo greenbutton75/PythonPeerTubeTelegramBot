@@ -1,0 +1,8 @@
+.git
+.env
+.dockerignore
+.gitignore
+Dockerfile
+readme.txt
+docker-compose.yml
+build.bat
