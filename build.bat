@@ -1,1 +1,1 @@
-docker build -t vvkpybot .
+docker build -t pocketuptimetelegrambot .
