@@ -156,8 +156,6 @@ def executecommand(context: CallbackContext):
     context.user_data["selected_server"] = ""
     context.user_data["selected_duration"] = ""
 
-    # TODO uncomment in production!!!
-    '''
     command  = API_URL + "/Peertube/" + context.user_data["selected_command"] + "?url=" + context.user_data["selected_server"]
     if context.user_data["selected_command"] == "Mute":
         t = context.user_data["selected_duration"].split()[0]
@@ -175,10 +173,6 @@ def executecommand(context: CallbackContext):
         return ""
 
     return response.text
-    '''
-
-    # TODO comment in production!!!
-    return "Executed!"
 
 
 def main() -> None:
