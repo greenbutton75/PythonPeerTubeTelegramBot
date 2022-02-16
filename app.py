@@ -168,7 +168,11 @@ def executecommand(context: CallbackContext):
     'accept': '*/*'
     }
 
-    response = requests.request("POST", command, headers=headers, data=payload)
+    try:
+        response = requests.request("POST", command, headers=headers, data=payload)
+    except Exception as ex:
+        logger.info("error: %s", ex.message)
+        return ""
 
     return response.text
     '''
