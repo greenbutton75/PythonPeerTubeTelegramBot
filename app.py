@@ -151,11 +151,6 @@ def cancel(update: Update, context: CallbackContext) -> int:
 def executecommand(context: CallbackContext):
     logger.info("EXECUTE COMMAND: %s %s %s", context.user_data["selected_command"], context.user_data["selected_server"], context.user_data["selected_duration"])
 
-
-    context.user_data["selected_command"] = ""
-    context.user_data["selected_server"] = ""
-    context.user_data["selected_duration"] = ""
-
     command  = API_URL + "/Peertube/" + context.user_data["selected_command"] + "?url=" + context.user_data["selected_server"]
     if context.user_data["selected_command"] == "Mute":
         t = context.user_data["selected_duration"].split()[0]
@@ -163,14 +158,20 @@ def executecommand(context: CallbackContext):
 
     payload={}
     headers = {
-    'accept': '*/*'
+        'accept': '*/*'
     }
 
     try:
         response = requests.request("POST", command, headers=headers, data=payload)
     except Exception as ex:
         logger.info("error: %s", ex.message)
-        return ""
+        return ex.message
+
+    if response.status_code != 200:
+        return f'Error: {response.status_code}: {response.text}'
+
+    if response.text == "":
+        return "Success"
 
     return response.text
 
